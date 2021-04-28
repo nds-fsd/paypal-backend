@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 //require('./src/mongo/connection');
 const models = require('./src/mongo');
+const appRouter = require('./src/router');
 
 const app = express();
 const port = 3001;
@@ -19,3 +20,5 @@ app.use(bodyParser.json());
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
 })
+
+app.use("/",appRouter);

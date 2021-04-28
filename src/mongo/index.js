@@ -1,10 +1,9 @@
 require('./connection');
 const Student = require('./schemas/Student');
-const {initFirstStudent} = require('./initFirstStudent');
+const User = require("./schemas/user.js");
 
-
-initFirstStudent(Student);
 
 module.exports = {
   Student: Student,
+  User: User,
 }

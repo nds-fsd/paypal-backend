@@ -91,7 +91,7 @@ exports.searchPagination = (req, res) => {
     res.status(200).json(objects);
   })
   .catch(error => {
-    res.status(500).json(error);
+    res.status(500).json(error);20
   });
 }
 

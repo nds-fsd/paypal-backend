@@ -3,8 +3,6 @@ require('dotenv').config();
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-//require('./src/mongo/connection');
-const models = require('./src/mongo');
 const appRouter = require('./src/router');
 
 const app = express();

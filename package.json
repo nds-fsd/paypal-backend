@@ -1,0 +1,22 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nds-fsd/paypal-backend.git"
+  },
+  "author": "marcS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nds-fsd/paypal-backend/issues"
+  },
+  "homepage": "https://github.com/nds-fsd/paypal-backend#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}

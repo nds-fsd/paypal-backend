@@ -2,6 +2,7 @@
 var User = require('./models/userModel');
 var Contact = require('./models/contactModel');
 var PaymentMethod = require('./models/payment_methodModel.js');
+var Payment = require('./models/paymentsModel.js');
 
 exports.findAll = async (req, res) =>{
   res.status(200).json(await User.find());
@@ -20,6 +21,11 @@ exports.findContacts = async (req, res) =>{
 exports.findPaymentMethods = async (req, res) =>{
   const payment_methods = await PaymentMethod.find({user_id: req.params.id});
   res.status(200).json(payment_methods);
+}
+
+exports.findPayments = async (req, res) =>{
+  const payments = await Payment.find({$or: [{from: req.params.id}, {to: req.params.id}]});
+  res.status(200).json(payments);
 }
 
 exports.create = (req, res) => {

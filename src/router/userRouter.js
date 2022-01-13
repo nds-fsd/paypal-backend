@@ -13,6 +13,8 @@ UserRouter.get('/:id/contacts', UserController.findContacts);
 
 UserRouter.get('/:id/payment_methods', UserController.findPaymentMethods);
 
+UserRouter.get('/:id/payments', UserController.findPayments);
+
 UserRouter.post('/', UserController.create);
 
 UserRouter.delete('/:id', UserController.delete);

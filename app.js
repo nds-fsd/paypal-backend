@@ -10,10 +10,10 @@ const appRouter = require('./src/router');
 const app = express();
 const port = 3001;
 
-app.use(cors({
-  origin: '*',
-  optionsSuccessStatus: 200
-}));
+// app.use(cors({
+//   origin: '*',
+//   optionsSuccessStatus: 200
+// }));
 
 app.use(bodyParser.json());
 

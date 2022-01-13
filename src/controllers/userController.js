@@ -1,6 +1,7 @@
 // const db = require('./mongo');
 var User = require('./models/userModel');
 var Contact = require('./models/contactModel');
+var PaymentMethod = require('./models/payment_methodModel.js');
 
 exports.findAll = async (req, res) =>{
   res.status(200).json(await User.find());
@@ -14,6 +15,11 @@ exports.findOne = async (req, res) =>{
 exports.findContacts = async (req, res) =>{
   const contacts = await Contact.find({user_id: req.params.id});
   res.status(200).json(contacts);
+}
+
+exports.findPaymentMethods = async (req, res) =>{
+  const payment_methods = await PaymentMethod.find({user_id: req.params.id});
+  res.status(200).json(payment_methods);
 }
 
 exports.create = (req, res) => {

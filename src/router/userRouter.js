@@ -11,6 +11,8 @@ UserRouter.get('/:id', UserController.findOne);
 
 UserRouter.get('/:id/contacts', UserController.findContacts);
 
+UserRouter.get('/:id/payment_methods', UserController.findPaymentMethods);
+
 UserRouter.post('/', UserController.create);
 
 UserRouter.delete('/:id', UserController.delete);

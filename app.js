@@ -1,16 +1,19 @@
 require('dotenv').config();
 
+
 const express = require('express')
-const bodyParser = require('body-parser')
 const cors = require('cors')
+
+const bodyParser = require('body-parser')
 const appRouter = require('./src/router');
 
 const app = express();
 const port = 3001;
+
 app.use(cors({
   origin: '*',
   optionsSuccessStatus: 200
-}))
+}));
 
 app.use(bodyParser.json());
 

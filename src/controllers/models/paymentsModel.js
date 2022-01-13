@@ -11,6 +11,6 @@ const PaymentSchema = new Schema({
   payment_method: mongoose.Types.ObjectId,
 });
 
-var Payment = mongoose.model("user", PaymentSchema);
+var Payment = mongoose.model("payment", PaymentSchema);
 
 module.exports = Payment;

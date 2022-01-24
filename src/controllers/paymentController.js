@@ -16,6 +16,9 @@ exports.create = (req, res) => {
   newPayment.save(
     function (err) {
       if (err) return handleError(err);
+      else{
+        //Quitar/poner dinero
+      }
     }
   );
   res.status(201).json({Message: "Your new User was created Succesfully", newPayment});

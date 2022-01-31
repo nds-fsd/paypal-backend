@@ -6,7 +6,6 @@ const UserRouter = express.Router();
 
 UserRouter.get('/', UserController.findAll);
 
-
 UserRouter.get('/:id', UserController.findOne);
 
 UserRouter.get('/:id/contacts', UserController.findContacts);
@@ -20,6 +19,7 @@ UserRouter.post('/', UserController.create);
 UserRouter.delete('/:id', UserController.delete);
 
 UserRouter.patch('/:id', UserController.update);
+
 UserRouter.put('/:id', UserController.update);
 
 

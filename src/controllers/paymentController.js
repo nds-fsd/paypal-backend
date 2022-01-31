@@ -1,4 +1,4 @@
-var Payment = require('./models/paymentsModel.js');
+var Payment = require('../models/paymentsModel.js');
 
 exports.findAll = async (req, res) =>{
   res.status(200).json(await Payment.find());

@@ -1,4 +1,4 @@
-var Contact = require('./models/contactModel.js');
+var Contact = require('../models/contactModel.js');
 
 exports.findAll = async (req, res) =>{
   res.status(200).json(await Contact.find());

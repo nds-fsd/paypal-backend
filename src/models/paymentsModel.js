@@ -1,5 +1,6 @@
-const mongoose = require('../mongo');
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
 
 const PaymentSchema = new Schema({
   

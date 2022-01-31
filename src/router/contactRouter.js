@@ -6,7 +6,6 @@ const ContactRouter = express.Router();
 
 ContactRouter.get('/', ContactController.findAll);
 
-
 ContactRouter.get('/:id', ContactController.findOne);
 
 ContactRouter.post('/', ContactController.create);
@@ -14,6 +13,7 @@ ContactRouter.post('/', ContactController.create);
 ContactRouter.delete('/:id', ContactController.delete);
 
 ContactRouter.patch('/:id', ContactController.update);
+
 ContactRouter.put('/:id', ContactController.update);
 
 

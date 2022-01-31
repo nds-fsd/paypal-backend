@@ -70,3 +70,49 @@ exports.update = async (req,res) => {
   const updatedUser = await User.findAndUpdate({_id: id},data)
   res.status(200).json({message: "Your user has been updated Succesfully", updatedUser})
 }
+
+// const userModel = require("./user.model");
+// const bcrypt = require("bcrypt");
+// const jwt = require("jsonwebtoken");
+// const {validationResult} = require("express-validator");
+
+// const saveUser = async (req, res) => {
+//   // Ideally, we would validate that the input coming from the request is well formed
+
+//   const errors = validationResult(req);
+//   if(!errors.isEmpty()){
+//     return res.status(400).json(errors);
+//   }
+//   // We extract the email and password fields from the request body by destructuring
+//   const { email, password } = req.body;
+
+//   // We hash the password
+//   const genSalt = 10;
+//   const passwordHashed = bcrypt.hashSync(password, genSalt);
+
+//   // We save on db a new user with the password hashed
+//   const newUser = new userModel({
+//     email: email,
+//     password: passwordHashed,
+//   });
+//   const userSaved = await newUser.save();
+
+//   // We sign a JWT and return it to the user
+//   const token = jwt.sign({ id: userSaved._id }, process.env.JWT_SECRET);
+//   return res.status(201).json({ token: token, user: userSaved  });
+// };
+
+exports.getUser = async (req, res) => {
+  const token = req.headers.authorization.split(" ")[1];
+
+  let tokenData;
+  try {
+    tokenData = jwt.verify(token, process.env.JWT_SECRET);
+  } catch (e) {
+    return res.status(400).send("Invalid token");
+  }
+
+  const userData = await userModel.findById(tokenData.id);
+  return res.status(200).json(userData);
+};
+

@@ -1,8 +1,13 @@
 // const db = require('./mongo');
-var User = require('../models/userModel');
-var Contact = require('../models/contactModel');
-var PaymentMethod = require('../models/payment_methodModel.js');
-var Payment = require('../models/paymentsModel.js');
+var User = require('./models/userModel');
+var Contact = require('./models/contactModel');
+var PaymentMethod = require('./models/payment_methodModel.js');
+var Payment = require('./models/paymentsModel.js');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const MY_SALT_NUMBER = 10
+const JWT_PRIVATE_KEY = 'liiiiiisa'
 
 exports.findAll = async (req, res) =>{
   res.status(200).json(await User.find());
@@ -28,17 +33,24 @@ exports.findPayments = async (req, res) =>{
   res.status(200).json(payments);
 }
 
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
   const data = req.body;
-  var newUser = new User(data);
-  
-  newUser.save(
-    function (err) {
-      if (err) return handleError(err);
-    }
-  );
-  res.status(201).json({Message: "Your new User was created Succesfully", newUser});
-}
+
+  const existingUser = await User.findOne( { username: data.username })
+
+  if(existingUser) {
+    res.status(409).json({Message:"Username already in use"})
+  } else {
+    data.password = bcrypt.hashSync(data.password, MY_SALT_NUMBER);
+    var newUser = new User(data);
+    newUser.save(
+      function (err) {
+        if (err) return handleError(err);
+      }
+    );
+    res.status(201).json({Message: "Your new User was created Succesfully", newUser, token: jwt.sign({username: newUser.username}, JWT_PRIVATE_KEY)});
+  }
+  }
 
 exports.delete = (req,res) => {
   console.log(req.params.id);

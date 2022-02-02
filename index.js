@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express')
 const cors = require('cors')
+const mongoConnection = require('./src/mongo')
 
 const bodyParser = require('body-parser')
 const appRouter = require('./src/router');

@@ -1,8 +1,8 @@
 // const db = require('./mongo');
-var User = require('./models/userModel');
-var Contact = require('./models/contactModel');
-var PaymentMethod = require('./models/payment_methodModel.js');
-var Payment = require('./models/paymentsModel.js');
+var User = require('../models/userModel');
+var Contact = require('../models/contactModel');
+var PaymentMethod = require('../models/payment_methodModel.js');
+var Payment = require('../models/paymentsModel.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 

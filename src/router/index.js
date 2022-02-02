@@ -1,9 +1,10 @@
 const express = require('express');
 
-const { UserRouter } = require('./userRouter');
-const { PaymentRouter } = require('./paymentRouter');
-const { ContactRouter } = require('./contactRouter');
-const { PaymentMethodRouter } = require('./payment_methodRouter');
+const { UserRouter } = require('../router/userRouter');
+const { PaymentRouter } = require('../router/paymentRouter');
+const { ContactRouter } = require('../router/contactRouter');
+const { PaymentMethodRouter } = require('../router/payment_methodRouter');
+const loginRouter  = require('../router/loginRouter');
 
 
 
@@ -13,5 +14,6 @@ appRouter.use('/users', UserRouter);
 appRouter.use('/payments', PaymentRouter);
 appRouter.use('/contact', ContactRouter);
 appRouter.use('/payment_method', PaymentMethodRouter);
+appRouter.use('./login', loginRouter);
 
 module.exports = appRouter;

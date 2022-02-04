@@ -67,7 +67,7 @@ exports.delete = (req,res) => {
 exports.update = async (req,res) => {
   const id = req.params.id;
   const data = req.body;
-  const updatedUser = await User.findAndUpdate({_id: id},data)
+  const updatedUser = await User.findOneAndUpdate({_id: id},data)
   res.status(200).json({message: "Your user has been updated Succesfully", updatedUser})
 }
 

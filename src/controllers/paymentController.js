@@ -1,4 +1,5 @@
 var Payment = require('../models/paymentsModel.js');
+var User = require('../models/userModel.js');
 
 exports.findAll = async (req, res) =>{
   res.status(200).json(await Payment.find());
@@ -17,7 +18,10 @@ exports.create = (req, res) => {
     function (err) {
       if (err) return handleError(err);
       else{
-        //Quitar/poner dinero
+        const fromUser = User.find({_id:data.from});
+        const toUser = User.find({_id:data.to});
+        User.findOneAndUpdate({_id:data.from}, {...fromUser, money: fromUser.money-data.amount})
+        User.findOneAndUpdate({_id:data.to}, {...toUser, money: toUser.money+data.amount})
       }
     }
   );

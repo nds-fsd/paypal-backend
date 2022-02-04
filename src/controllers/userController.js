@@ -102,17 +102,5 @@ exports.update = async (req,res) => {
 //   return res.status(201).json({ token: token, user: userSaved  });
 // };
 
-exports.getUser = async (req, res) => {
-  const token = req.headers.authorization.split(" ")[1];
 
-  let tokenData;
-  try {
-    tokenData = jwt.verify(token, process.env.JWT_SECRET);
-  } catch (e) {
-    return res.status(400).send("Invalid token");
-  }
-
-  const userData = await userModel.findById(tokenData.id);
-  return res.status(200).json(userData);
-};
 

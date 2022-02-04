@@ -14,6 +14,6 @@ appRouter.use('/users', UserRouter);
 appRouter.use('/payments', PaymentRouter);
 appRouter.use('/contact', ContactRouter);
 appRouter.use('/payment_method', PaymentMethodRouter);
-appRouter.use('./login', loginRouter);
+appRouter.use('/', loginRouter);
 
 module.exports = appRouter;

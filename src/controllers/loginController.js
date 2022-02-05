@@ -5,7 +5,7 @@ const User = require("../models/userModel");
 exports.login = async (req, res) => {
   
   const { email, password } = req.body;
-
+  console.log(email);
   const user = await User.findOne({ email: email });
   
   const genSalt = 10;

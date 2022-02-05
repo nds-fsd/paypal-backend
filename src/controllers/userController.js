@@ -36,7 +36,7 @@ exports.findPayments = async (req, res) =>{
 exports.create = async (req, res) => {
   const data = req.body;
 
-  const existingUser = await User.findOne( { username: data.username })
+  const existingUser = await User.findOne( { email: data.email })
 
   if(existingUser) {
     res.status(409).json({Message:"Username already in use"})
@@ -48,7 +48,7 @@ exports.create = async (req, res) => {
         if (err) return handleError(err);
       }
     );
-    res.status(201).json({Message: "Your new User was created Succesfully", newUser, token: jwt.sign({username: newUser.username}, JWT_PRIVATE_KEY)});
+    res.status(201).json({Message: "Your new User was created Succesfully", newUser, token: jwt.sign({email: newUser.email}, JWT_PRIVATE_KEY)});
   }
   }
 

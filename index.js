@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 
 
@@ -9,7 +10,7 @@ const bodyParser = require('body-parser')
 const appRouter = require('./src/router');
 
 const app = express();
-const port = 3001;
+const port = 3090;
 
 app.use(cors({
   origin: '*',

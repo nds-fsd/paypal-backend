@@ -29,7 +29,8 @@ exports.findPayments = async (req, res) =>{
 };
   
   exports.create = async (req, res) => {
-    const existingUser = await User.findOne( { email: data.email })
+    const { name, surname, email, password } = req.body;
+    const existingUser = await User.findOne( { email: email })
 
     if(existingUser) {
       res.status(409).json({Message:"Username already in use"})
@@ -39,13 +40,13 @@ exports.findPayments = async (req, res) =>{
     if(!errors.isEmpty()){
       return res.status(400).json(errors);
     }
-    
-    const { email, password } = req.body;
   
     const genSalt = 10;
     const passwordHashed = bcrypt.hashSync(password, genSalt);
   
-    const newUser = new userModel({
+    const newUser = new User ({
+      name: name,
+      surname: surname,
       email: email,
       password: passwordHashed,
     });

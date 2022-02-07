@@ -15,10 +15,6 @@ UserRouter.get('/:id/payment_methods', UserController.findPaymentMethods);
 UserRouter.get('/:id/payments', UserController.findPayments);
 
 UserRouter.post('/', body("email", "Email must be a valid email.").isEmail(),
-body("password", "Password must have a minimum length of 8 and At least one digit [0-9]\n" +
-    "At least one lowercase character [a-z]\n" +
-    "At least one uppercase character [A-Z]\n" +
-    "At least one special character [*.!@#$%^&(){}[]:;<>,.?/~_+-=|\\]").isLength({min:8}).matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\\])$"),
     UserController.create).get('/', UserController.findOne);
 
 UserRouter.delete('/:id', UserController.delete);

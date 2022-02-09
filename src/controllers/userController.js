@@ -40,7 +40,6 @@ exports.findPayments = async (req, res) =>{
     if(!errors.isEmpty()){
       return res.status(400).json(errors);
     }
-  
     const genSalt = 10;
     const passwordHashed = bcrypt.hashSync(password, genSalt);
   

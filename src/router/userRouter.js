@@ -15,7 +15,9 @@ UserRouter.get('/:id/payment_methods', UserController.findPaymentMethods);
 UserRouter.get('/:id/payments', UserController.findPayments);
 
 UserRouter.post('/', body("email", "Email must be a valid email.").isEmail(),
-    UserController.create).get('/', UserController.findOne);
+    UserController.create)
+    
+UserRouter.get('/me', UserController.findOne);
 
 UserRouter.delete('/:id', UserController.delete);
 

@@ -5,6 +5,7 @@ const UserSchema = new Schema({
   surname: String,
   email: String,
   password: String,
+  image: String
 });
 
 var User = model("user", UserSchema);

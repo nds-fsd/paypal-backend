@@ -53,7 +53,7 @@ exports.findPayments = async (req, res) =>{
     const userSaved = await newUser.save();
   
     const token = jwt.sign({ id: userSaved._id }, process.env.JWT_SECRET);
-    return res.status(201).json({ token: token, user: userSaved  });
+    return res.status(201).json({ token: token, id: userSaved._id  });
     
   };
   
@@ -69,17 +69,16 @@ exports.findPayments = async (req, res) =>{
     return res.status(200).json(userData);
   };
 
-
-exports.delete = (req,res) => {
-  console.log(req.params.id);
-  const id = req.params.id;
+    exports.delete = (req,res) => {
+    console.log(req.params.id);
+    const id = req.params.id;
   
-  User.deleteOne({_id: id}, function (err) {
-    if (err) return handleError(err);
+    User.deleteOne({_id: id}, function (err) {
+      if (err) return handleError(err);
   });
   
   const deletedUser = req.body;
-  res.status(201).json({Message: "Your User was deleted Succesfully",deletedUser});
+    res.status(201).json({Message: "Your User was deleted Succesfully",deletedUser});
 };
 
 exports.update = async (req,res) => {

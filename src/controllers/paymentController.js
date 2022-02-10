@@ -16,7 +16,10 @@ exports.create = (req, res) => {
   
   newPayment.save(
     function (err) {
-      if (err) return handleError(err);
+      if (err) {
+        console.log(err);
+        return handleError(err);
+      }
       else{
         const fromUser = User.find({_id:data.from});
         const toUser = User.find({_id:data.to});

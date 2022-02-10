@@ -8,7 +8,7 @@ const PaymentSchema = new Schema({
   date: { type: Date, default: Date.now },
   amount: Number,
   currency: {type: String, enum: ["$", "€"]},
-  payment_method: mongoose.Types.ObjectId,
+  //payment_method: mongoose.Types.ObjectId,
 });
 
 var Payment = mongoose.model("payment", PaymentSchema);

@@ -20,8 +20,8 @@ exports.create = (req, res) => {
       else{
         const fromUser = User.find({_id:data.from});
         const toUser = User.find({_id:data.to});
-        User.findOneAndUpdate({_id:data.from}, {...fromUser, money: fromUser.money-data.amount})
-        User.findOneAndUpdate({_id:data.to}, {...toUser, money: toUser.money+data.amount})
+        User.findOneAndUpdate({_id:data.from}, {...fromUser, wallet: fromUser.wallet-data.amount})
+        User.findOneAndUpdate({_id:data.to}, {...toUser, wallet: toUser.wallet+data.amount})
       }
     }
   );

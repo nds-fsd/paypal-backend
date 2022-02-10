@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const PaymentSchema = new Schema({
-  
   from: mongoose.Types.ObjectId,
   to: mongoose.Types.ObjectId,
   date: { type: Date, default: Date.now },

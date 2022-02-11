@@ -4,6 +4,7 @@ const PaymentController = require('../controllers/paymentController');
 const ContactController = require('../controllers/contactController');
 const PaymentMethodController = require('../controllers/paymentController');
 const loginController = require('../controllers/loginController');
+const RequestController = require('../controllers/requestController');
 
 
 
@@ -13,5 +14,6 @@ module.exports = {
   ContactController,
   PaymentMethodController,
   loginController,
+  RequestController,
 };  
 

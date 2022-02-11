@@ -15,6 +15,7 @@ UserRouter.get('/:id/contacts', UserController.findContacts);
 UserRouter.get('/:id/payment_methods', UserController.findPaymentMethods);
 
 UserRouter.get('/:id/payments', UserController.findPayments);
+UserRouter.get('/:id/requests', UserController.findRequests);
 
 UserRouter.post('/', body("email", "Email must be a valid email.").isEmail(),
     UserController.create)

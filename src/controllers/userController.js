@@ -27,6 +27,11 @@ exports.findPayments = async (req, res) =>{
   const payments = await Payment.find({$or: [{from: req.params.id}, {to: req.params.id}]});
   res.status(200).json(payments);
 };
+
+exports.findRequests = async (req, res) =>{
+  const requests = await Payment.find({to: req.params.id});
+  res.status(200).json(requests);
+};
   
 exports.create = async (req, res) => {
     const { name, surname, email, password } = req.body;

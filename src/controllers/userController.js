@@ -3,6 +3,7 @@ const User = require('../models/userModel');
 const Contact = require('../models/contactModel');
 const PaymentMethod = require('../models/payment_methodModel.js');
 const Payment = require('../models/paymentsModel.js');
+const Request = require('../models/requestModel.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {validationResult} = require("express-validator");
@@ -29,7 +30,7 @@ exports.findPayments = async (req, res) =>{
 };
 
 exports.findRequests = async (req, res) =>{
-  const requests = await Payment.find({to: req.params.id});
+  const requests = await Request.find({to: req.params.id});
   res.status(200).json(requests);
 };
   

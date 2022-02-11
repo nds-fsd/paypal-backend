@@ -12,5 +12,7 @@ RequestRouter.post('/', RequestController.create);
 
 RequestRouter.delete('/:id', RequestController.delete);
 
+RequestRouter.patch('/:id', RequestController.update);
+RequestRouter.put('/:id', RequestController.update);
 
 module.exports = { RequestRouter };

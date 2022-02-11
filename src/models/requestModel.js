@@ -8,6 +8,7 @@ const RequestSchema = new Schema({
   date: { type: Date, default: Date.now },
   amount: Number,
   currency: {type: String, enum: ["$", "€"]},
+  status: {type: String, enum: ["pending", "accepted", "declined"], default:"pending"},
 });
 
 var Request = mongoose.model("request", RequestSchema);

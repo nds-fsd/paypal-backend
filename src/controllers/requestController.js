@@ -36,3 +36,11 @@ exports.delete = (req,res) => {
   const deletedRequest = req.body;
   res.status(201).json({Message: "Your payment was deleted Succesfully",deletedRequest});
 }
+
+exports.update = async (req,res) => {
+  const id = req.params.id;
+  const data = req.body;
+  
+  const updatedRequest = await Request.findOneAndUpdate({_id: id},data)
+  res.status(200).json({message: "Your request has been updated Succesfully", updatedRequest})
+}

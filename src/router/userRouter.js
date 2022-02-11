@@ -8,6 +8,8 @@ UserRouter.get('/', UserController.findAll);
 
 // UserRouter.get('/:id', UserController.findOne);
 UserRouter.get('/name/:id', UserController.findOneName);
+UserRouter.get('/id/:email', UserController.findOneId);
+
 UserRouter.get('/:id/contacts', UserController.findContacts);
 
 UserRouter.get('/:id/payment_methods', UserController.findPaymentMethods);

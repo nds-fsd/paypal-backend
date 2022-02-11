@@ -28,7 +28,7 @@ exports.findPayments = async (req, res) =>{
   res.status(200).json(payments);
 };
   
-  exports.create = async (req, res) => {
+exports.create = async (req, res) => {
     const { name, surname, email, password } = req.body;
     const existingUser = await User.findOne( { email: email })
 
@@ -80,10 +80,16 @@ exports.findPayments = async (req, res) =>{
     res.status(201).json({Message: "Your User was deleted Succesfully",deletedUser});
 };
 
+exports.findOneName = async (req, res) =>{
+  let id = req.params.id;
+  const userData = await User.findById(id);
+  return res.status(200).json(userData.name);
+};
+
 exports.update = async (req,res) => {
   const id = req.params.id;
   const data = req.body;
-  const updatedUser = await User.findAndUpdate({_id: id},data)
+  const updatedUser = await User.findOneAndUpdate({_id: id},data)
   res.status(200).json({message: "Your user has been updated Succesfully", updatedUser})
 };
 

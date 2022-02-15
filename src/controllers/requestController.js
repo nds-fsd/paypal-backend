@@ -13,7 +13,7 @@ exports.findOne = async (req, res) =>{
 exports.create = async (req, res) => {
   const data = req.body;
   var newRequest = new Request(data);
-  
+
   newRequest.save(
     function (err) {
       if (err) {
@@ -44,3 +44,10 @@ exports.update = async (req,res) => {
   const updatedRequest = await Request.findOneAndUpdate({_id: id},data)
   res.status(200).json({message: "Your request has been updated Succesfully", updatedRequest})
 }
+
+exports.findRequestById = async (req, res) =>{
+  let id = req.params.id;
+  const request = await Request.find({to: id});
+  console.log(request);
+  return res.status(200).json(request);
+};

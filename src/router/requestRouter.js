@@ -3,6 +3,7 @@ const { RequestController } = require('../controllers')
 
 const RequestRouter = express.Router();
 
+RequestRouter.get('/request/:id', RequestController.findRequestById);
 
 RequestRouter.get('/', RequestController.findAll);
 

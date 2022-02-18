@@ -103,14 +103,20 @@ exports.findOneId = async (req, res) =>{
 exports.update = async (req,res) => {
   const id = req.params.id;
   const data = req.body;
-  
+  console.log("updating");
   if (data.password && data.password.length>0) {
+    console.log("if: " + data.password);
     const genSalt = 10;
     const passwordHashed = bcrypt.hashSync(data.password, genSalt);
     data.password=passwordHashed;
   } else {
-    delete data.password;
+    console.log("else1: " + data.password);
+    data.password = await User.find({_id:id}).password;
+    console.log("else2: " + data.password);
+
   }
+
+  console.log(data);
 
   
   const updatedUser = await User.findOneAndUpdate({_id: id},data)

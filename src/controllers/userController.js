@@ -35,7 +35,7 @@ exports.findRequests = async (req, res) =>{
 };
   
 exports.create = async (req, res) => {
-    const { name, surname, email, password } = req.body;
+    const { name, surname, email, password, currency } = req.body;
     const existingUser = await User.findOne( { email: email })
 
     if(existingUser) {
@@ -54,6 +54,7 @@ exports.create = async (req, res) => {
       surname: surname,
       email: email,
       password: passwordHashed,
+      currency: currency,
     });
     const userSaved = await newUser.save();
   

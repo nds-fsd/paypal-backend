@@ -24,11 +24,59 @@ exports.create = async (req, res) => {
         return handleError(err);
       }
       else {
-        fromUser.wallet -= data.amount;
-        toUser.wallet += data.amount;
+        // fromUser.wallet -= data.amount;
+        // toUser.wallet += data.amount;
+        
+        if (data.currency=='$') 
+            {
+            if (fromUser.currency=='$' && toUser.currency=='$') 
+            {
+            fromUser.wallet -= data.amount;
+            toUser.wallet += data.amount;
+            }
+            
+            else if (fromUser.currency=='$' && toUser.currency=='€') {
+            fromUser.wallet -= data.amount;
+            toUser.wallet += 0.9*data.amount;
+            }
+            
+            else if (fromUser.currency=='€' && toUser.currency=='€') {
+            fromUser.wallet -= 0.9*data.amount;
+            toUser.wallet += 0.9*data.amount;
+            }
+            
+            else if (fromUser.currency=='€' && toUser.currency=='$') {
+            fromUser.wallet -= 0.9*data.amount;
+            toUser.wallet += data.amount;
+            }
+            }
+        
+        if (data.currency=='€') {
+        
+            if (fromUser.currency=='$' && toUser.currency=='$') 
+            {
+            fromUser.wallet -= 1.11*data.amount;
+            toUser.wallet += 1.11*data.amount;
+            }
+            
+            else if (fromUser.currency=='$' && toUser.currency=='€') {
+            fromUser.wallet -= 1.11*data.amount;
+            toUser.wallet += data.amount;
+            }
+            
+            else if (fromUser.currency=='€' && toUser.currency=='€') {
+            fromUser.wallet -= data.amount;
+            toUser.wallet += data.amount;
+            }
+            
+            else if (fromUser.currency=='€' && toUser.currency=='$') {
+            fromUser.wallet -= data.amount;
+            toUser.wallet += 1.11*data.amount;
+            }
+            }
         fromUser.save();
         toUser.save();
-      }
+        }
     }
   );
   res.status(201).json({Message: "Your new payment was created Succesfully", newPayment});

@@ -2,6 +2,7 @@ const express = require('express');
 const { UserController } = require('../controllers')
 const {body} = require("express-validator");
 const UserRouter = express.Router();
+const authMiddleware = require('../auth/authMiddleware');
 
 
 UserRouter.get('/', UserController.findAll);
@@ -20,7 +21,7 @@ UserRouter.get('/:id/requests', UserController.findRequests);
 UserRouter.post('/', body("email", "Email must be a valid email.").isEmail(),
     UserController.create)
 
-    UserRouter.get('/me', UserController.findOne);
+UserRouter.route('/me').get(authMiddleware, UserController.findOne);
 
 UserRouter.delete('/:id', UserController.delete);
 

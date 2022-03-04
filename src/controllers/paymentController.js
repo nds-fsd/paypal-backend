@@ -1,5 +1,7 @@
 var Payment = require('../models/paymentsModel.js');
 var User = require('../models/userModel.js');
+const CC = require('../../node_modules/currency-converter-lt');
+var currencyConverter = new CC()
 
 exports.findAll = async (req, res) =>{
   res.status(200).json(await Payment.find());
@@ -36,8 +38,16 @@ exports.create = async (req, res) => {
             }
             
             else if (fromUser.currency=='$' && toUser.currency=='€') {
-            fromUser.wallet -= data.amount;
-            toUser.wallet += 0.9*data.amount;
+
+              fromUser.wallet -= data.amount;
+              toUser.wallet +=0.9*data.amount;
+              
+              // currencyConverter.from("USD").to("EUR").amount(data.amount).convert()
+              // .then((response) => {
+              //   console.log(response/100) ;
+              //   toUser.wallet +=response/100
+              // })
+            
             }
             
             else if (fromUser.currency=='€' && toUser.currency=='€') {

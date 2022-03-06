@@ -31,33 +31,56 @@ exports.create = async (req, res) => {
         
         if (data.currency=='$') 
             {
+
             if (fromUser.currency=='$' && toUser.currency=='$') 
             {
             fromUser.wallet -= data.amount;
+            fromUser.save();
             toUser.wallet += data.amount;
+            toUser.save();
             }
             
-            else if (fromUser.currency=='$' && toUser.currency=='€') {
-
+            else if (fromUser.currency=='$' && toUser.currency=='€') 
+            {
               fromUser.wallet -= data.amount;
-              toUser.wallet +=0.9*data.amount;
+              fromUser.save();
               
-              // currencyConverter.from("USD").to("EUR").amount(data.amount).convert()
-              // .then((response) => {
-              //   console.log(response/100) ;
-              //   toUser.wallet +=response/100
-              // })
-            
+              currencyConverter.from("USD").to("EUR").amount(data.amount).convert()
+              .then((response) => {
+                console.log(response/100) ;
+                toUser.wallet +=response/100;
+                toUser.save();
+              })
             }
             
-            else if (fromUser.currency=='€' && toUser.currency=='€') {
-            fromUser.wallet -= 0.9*data.amount;
-            toUser.wallet += 0.9*data.amount;
+            else if (fromUser.currency=='€' && toUser.currency=='€') 
+            {
+            currencyConverter.from("USD").to("EUR").amount(data.amount).convert()
+              .then((response) => {
+                console.log(response/100) ;
+                fromUser.wallet -=response/100;
+                fromUser.save();
+              })
+            
+            currencyConverter.from("USD").to("EUR").amount(data.amount).convert()
+              .then((response) => {
+                console.log(response/100) ;
+                toUser.wallet +=response/100;
+                toUser.save();
+              })
             }
             
-            else if (fromUser.currency=='€' && toUser.currency=='$') {
-            fromUser.wallet -= 0.9*data.amount;
+            else if (fromUser.currency=='€' && toUser.currency=='$') 
+            {
+            currencyConverter.from("USD").to("EUR").amount(data.amount).convert()
+              .then((response) => {
+                console.log(response/100) ;
+                fromUser.wallet -=response/100;
+                fromUser.save();
+              })
+
             toUser.wallet += data.amount;
+            toUser.save();
             }
             }
         
@@ -65,27 +88,55 @@ exports.create = async (req, res) => {
         
             if (fromUser.currency=='$' && toUser.currency=='$') 
             {
-            fromUser.wallet -= 1.11*data.amount;
-            toUser.wallet += 1.11*data.amount;
+            currencyConverter.from("EUR").to("USD").amount(data.amount).convert()
+              .then((response) => {
+                console.log(response/100) ;
+                fromUser.wallet -=response/100;
+                fromUser.save();
+              })
+            
+            currencyConverter.from("EUR").to("USD").amount(data.amount).convert()
+              .then((response) => {
+                console.log(response/100) ;
+                toUser.wallet +=response/100;
+                toUser.save();
+              })
             }
             
             else if (fromUser.currency=='$' && toUser.currency=='€') {
-            fromUser.wallet -= 1.11*data.amount;
+              currencyConverter.from("EUR").to("USD").amount(data.amount).convert()
+              .then((response) => {
+                console.log(response/100) ;
+                fromUser.wallet -=response/100;
+                fromUser.save();
+              })
+              
             toUser.wallet += data.amount;
+            toUser.save();
             }
             
             else if (fromUser.currency=='€' && toUser.currency=='€') {
             fromUser.wallet -= data.amount;
+            fromUser.save();
             toUser.wallet += data.amount;
+            toUser.save();
             }
             
-            else if (fromUser.currency=='€' && toUser.currency=='$') {
+            else if (fromUser.currency=='€' && toUser.currency=='$') 
+            {
             fromUser.wallet -= data.amount;
-            toUser.wallet += 1.11*data.amount;
+            fromUser.save();
+
+            currencyConverter.from("EUR").to("USD").amount(data.amount).convert()
+              .then((response) => {
+                console.log(response/100) ;
+                toUser.wallet +=response/100;
+                toUser.save();
+              })
             }
             }
-        fromUser.save();
-        toUser.save();
+        // fromUser.save();
+        // toUser.save();
         }
     }
   );

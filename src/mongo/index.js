@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/mongo-test');
+mongoose.connect(process.env.DATABASE_URL);
 
 const mongo = mongoose.connection;
 mongo.on('error', (error) => console.error(error));

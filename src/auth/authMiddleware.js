@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
-const User = require('../models/userModel')
+const User = require('../models/userModel');
 
-exports.authMiddleware = async (req, res, next)=> {
+exports.authMiddleware = async (req, res, next) => {
     const token = req.headers.authorization?.split(" ")[1];
 
     let tokenData;
@@ -13,8 +13,8 @@ exports.authMiddleware = async (req, res, next)=> {
 
     const user = await User.findById(tokenData.id);
     if(user){
-        req.sessionUser = JSON.stringify(user);
+        req.sessionUser = user;
     }
     next();
 
-}
+};

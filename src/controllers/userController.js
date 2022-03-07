@@ -57,21 +57,14 @@ exports.create = async (req, res) => {
     });
     const userSaved = await newUser.save();
   
-    const token = jwt.sign({ id: userSaved._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: userSaved._id }, process.env.JWT_SECRET, {expiresIn: '1h' });
     return res.status(201).json({ token: token, id: userSaved._id  });
     
   };
   
   exports.findOne = async (req, res) =>{
-    const token = req.headers.authorization.split(" ")[1];
-    let tokenData;
-    try {
-      tokenData = jwt.verify(token, process.env.JWT_SECRET);
-    } catch (e) {
-      return res.status(400).send("invalid token");
-    }
-    const userData = await User.findById(tokenData.id);
-    return res.status(200).json(userData);
+
+    return res.status(200).json(req.sessionUser);
   };
 
     exports.delete = (req,res) => {

@@ -10,7 +10,7 @@ const bodyParser = require('body-parser')
 const appRouter = require('./src/router');
 
 const app = express();
-const port = 3090;
+const port = process.env.PORT;
 
 app.use(cors({
   origin: '*',

@@ -9,7 +9,8 @@ const bodyParser = require('body-parser')
 const appRouter = require('./src/router');
 
 const app = express();
-const port = 3090;
+
+const port = process.env.PORT;
 
 app.use(cors({
   origin: '*',
@@ -18,8 +19,8 @@ app.use(cors({
 
 app.use(bodyParser.json());
 
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`)
-})
+const server = app.listen(port, () => {
+  console.log(`App listening at http://localhost:${process.env.PORT}`)
+});
 
 app.use("/", appRouter);

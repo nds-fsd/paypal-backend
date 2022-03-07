@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const User = require('../models/userModel')
+const User = require('../models/userModel');
 
 exports.authMiddleware = async (req, res, next) => {
     const token = req.headers.authorization?.split(" ")[1];
@@ -17,4 +17,4 @@ exports.authMiddleware = async (req, res, next) => {
     }
     next();
 
-}
+};

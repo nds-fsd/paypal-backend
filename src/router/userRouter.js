@@ -18,8 +18,7 @@ UserRouter.get('/:id/payment_methods', authMiddleware, UserController.findPaymen
 UserRouter.get('/:id/payments', authMiddleware, UserController.findPayments);
 UserRouter.get('/:id/requests', authMiddleware, UserController.findRequests);
 
-UserRouter.post('/', body("email", "Email must be a valid email.").isEmail(),
-authMiddleware, UserController.create)
+UserRouter.post('/', body("email", "Email must be a valid email.").isEmail(), UserController.create)
 
 UserRouter.get('/me', authMiddleware, UserController.findOne);
 

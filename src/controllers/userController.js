@@ -86,6 +86,12 @@ exports.findOneName = async (req, res) =>{
   return res.status(200).json(userData.name);
 };
 
+exports.findOneEmail = async (req, res) =>{
+  let id = req.params.id;
+  const userData = await User.findById(id);
+  return res.status(200).json(userData.email);
+};
+
 exports.findOneId = async (req, res) =>{
   let email = req.params.email;
   const userData = await User.find({"email": email});

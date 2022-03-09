@@ -8,6 +8,7 @@ const { authMiddleware } = require('../auth/authMiddleware');
 UserRouter.get('/', UserController.findAll);
 
 // UserRouter.get('/:id', UserController.findOne);
+UserRouter.get('/email/:id', UserController.findOneEmail);
 UserRouter.get('/name/:id', UserController.findOneName);
 UserRouter.get('/id/:email', UserController.findOneId);
 

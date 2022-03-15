@@ -25,7 +25,9 @@ exports.findPaymentMethods = async (req, res) =>{
 };
 
 exports.findPayments = async (req, res) =>{
-  const payments = await Payment.find({$or: [{from: req.params.id}, {to: req.params.id}]});
+
+  const user = req.sessionUser;
+  const payments = await Payment.find({$or: [{from: user._id}, {to: user._id}]});
   res.status(200).json(payments);
 };
 

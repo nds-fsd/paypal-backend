@@ -6,6 +6,7 @@ const UserSchema = new Schema({
   email: String,
   password: String,
   image: String,
+  currency: String,
   wallet: { type: Number, default: 1000 },
 });
 

@@ -25,7 +25,9 @@ exports.findPaymentMethods = async (req, res) =>{
 };
 
 exports.findPayments = async (req, res) =>{
-  const payments = await Payment.find({$or: [{from: req.params.id}, {to: req.params.id}]});
+
+  const user = req.sessionUser;
+  const payments = await Payment.find({$or: [{from: user._id}, {to: user._id}]});
   res.status(200).json(payments);
 };
 
@@ -35,7 +37,7 @@ exports.findRequests = async (req, res) =>{
 };
   
 exports.create = async (req, res) => {
-    const { name, surname, email, password } = req.body;
+    const { name, surname, email, password, currency } = req.body;
     const existingUser = await User.findOne( { email: email })
 
     if(existingUser) {
@@ -54,6 +56,7 @@ exports.create = async (req, res) => {
       surname: surname,
       email: email,
       password: passwordHashed,
+      currency: currency,
     });
     const userSaved = await newUser.save();
   
@@ -85,6 +88,12 @@ exports.findOneName = async (req, res) =>{
   return res.status(200).json(userData.name);
 };
 
+exports.findOneEmail = async (req, res) =>{
+  let id = req.params.id;
+  const userData = await User.findById(id);
+  return res.status(200).json(userData.email);
+};
+
 exports.findOneId = async (req, res) =>{
   let email = req.params.email;
   const userData = await User.find({"email": email});
@@ -98,12 +107,14 @@ exports.update = async (req,res) => {
   const data = req.body;
   console.log("updating");
   if (data.password && data.password.length>0) {
-    console.log("if: " + data.password);
+    console.log("if: " + data.password + data.currency);
     const genSalt = 10;
     const passwordHashed = bcrypt.hashSync(data.password, genSalt);
     data.password=passwordHashed;
-  } else {
-    console.log("else1: " + data.password);
+  } 
+  
+  else {
+    console.log("else1: " + data.password + data.currency);
     data.password = await User.find({_id:id}).password;
     console.log("else2: " + data.password);
 

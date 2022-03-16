@@ -6,11 +6,8 @@ const ContactSchema = new Schema({
   user_id: {
     type: mongoose.Types.ObjectId
   },
-  contact_user_id: {
-    type: mongoose.Types.ObjectId
-  },
-  name: String,
-  blocked: Boolean,
+  contact_name: String,
+  contact_email: String,
 });
 
 const Contact = mongoose.model("contact", ContactSchema);

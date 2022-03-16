@@ -1,4 +1,5 @@
 var Contact = require('../models/contactModel.js');
+var User = require('../models/userModel.js');
 
 exports.findAll = async (req, res) =>{
   res.status(200).json(await Contact.find());
@@ -10,7 +11,13 @@ exports.findOne = async (req, res) =>{
 }
 
 exports.create = (req, res) => {
-  const data = req.body;
+  const body = req.body;
+  const contact = User.findById(body.contact_id);
+  const data = {
+    user_id: body.user_id, 
+    contact_name: contact.name + contact.surname,
+    contact_email: contact.email
+  }
   var newContact = new Contact(data);
   
   newContact.save(

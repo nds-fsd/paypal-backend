@@ -1,7 +1,6 @@
 
 require('dotenv').config();
 
-
 const express = require('express')
 const cors = require('cors')
 const mongoConnection = require('./src/mongo')
@@ -21,7 +20,7 @@ app.use(cors({
 app.use(bodyParser.json());
 
 const server = app.listen(port, () => {
-  console.log(`App listening at http://localhost:${process.env.PORT}`)
+  console.log(`App listening at http://localhost:${port}`)
 });
 
 app.use("/", appRouter);

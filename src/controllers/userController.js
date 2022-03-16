@@ -15,7 +15,7 @@ exports.findAll = async (req, res) =>{
 
 
 exports.findContacts = async (req, res) =>{
-  const contacts = await Contact.find({user_id: req.params.id});
+  const contacts = await Contact.find({user_id: req.sessionUser._id});
   res.status(200).json(contacts);
 };
 

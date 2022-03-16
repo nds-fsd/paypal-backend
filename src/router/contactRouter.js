@@ -1,14 +1,16 @@
 const express = require('express');
 const { ContactController } = require('../controllers')
+const { authMiddleware } = require('../auth/authMiddleware');
 
 const ContactRouter = express.Router();
+
 
 
 ContactRouter.get('/', ContactController.findAll);
 
 ContactRouter.get('/:id', ContactController.findOne);
 
-ContactRouter.post('/', ContactController.create);
+ContactRouter.post('/', authMiddleware, ContactController.create);
 
 ContactRouter.delete('/:id', ContactController.delete);
 

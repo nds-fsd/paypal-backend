@@ -8,6 +8,7 @@ const { authMiddleware } = require('../auth/authMiddleware');
 UserRouter.get('/', UserController.findAll);
 
 // UserRouter.get('/:id', UserController.findOne);
+UserRouter.get('/email/:id', UserController.findOneEmail);
 UserRouter.get('/name/:id', UserController.findOneName);
 UserRouter.get('/id/:email', UserController.findOneId);
 
@@ -15,7 +16,7 @@ UserRouter.get('/:id/contacts',authMiddleware, UserController.findContacts);
 
 UserRouter.get('/:id/payment_methods', authMiddleware, UserController.findPaymentMethods);
 
-UserRouter.get('/:id/payments', authMiddleware, UserController.findPayments);
+UserRouter.get('/payments', authMiddleware, UserController.findPayments);
 UserRouter.get('/:id/requests', authMiddleware, UserController.findRequests);
 
 UserRouter.post('/', body("email", "Email must be a valid email.").isEmail(), UserController.create)

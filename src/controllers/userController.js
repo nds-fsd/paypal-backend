@@ -25,7 +25,9 @@ exports.findPaymentMethods = async (req, res) =>{
 };
 
 exports.findPayments = async (req, res) =>{
-  const payments = await Payment.find({$or: [{from: req.params.id}, {to: req.params.id}]});
+
+  const user = req.sessionUser;
+  const payments = await Payment.find({$or: [{from: user._id}, {to: user._id}]});
   res.status(200).json(payments);
 };
 
@@ -84,6 +86,12 @@ exports.findOneName = async (req, res) =>{
   let id = req.params.id;
   const userData = await User.findById(id);
   return res.status(200).json(userData.name);
+};
+
+exports.findOneEmail = async (req, res) =>{
+  let id = req.params.id;
+  const userData = await User.findById(id);
+  return res.status(200).json(userData.email);
 };
 
 exports.findOneId = async (req, res) =>{

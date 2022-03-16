@@ -10,13 +10,15 @@ exports.findOne = async (req, res) =>{
   res.status(200).json(contact);
 }
 
-exports.create = (req, res) => {
-  const body = req.body;
-  const contact = User.findById(body.contact_id);
+exports.create = async (req, res) => {
+  const contactEmail = req.body.email;
+  const userData = await User.find({"email": contactEmail});
+  console.log(userData)
+  const userSession = req.sessionUser
   const data = {
-    user_id: body.user_id, 
-    contact_name: contact.name + contact.surname,
-    contact_email: contact.email
+    user_id: userSession._id, 
+    contact_name: userData[0].name + " " + userData[0].surname,
+    contact_email: contactEmail
   }
   var newContact = new Contact(data);
   

@@ -84,7 +84,9 @@ exports.create = async (req, res) => {
 
 exports.findOneName = async (req, res) =>{
   let id = req.params.id;
+  console.log(id);
   const userData = await User.findById(id);
+  console.log(userData)
   return res.status(200).json(userData.name);
 };
 

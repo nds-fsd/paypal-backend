@@ -108,6 +108,8 @@ exports.update = async (req,res) => {
   const user = req.sessionUser;
   const id = user._id
   const data = req.body;
+
+
   console.log("updating");
   if (data.password && data.password.length>0) {
     console.log("if: " + data.password + data.currency);
@@ -120,11 +122,17 @@ exports.update = async (req,res) => {
     console.log("else1: " + data.password + data.currency);
     data.password = await User.find({_id:id}).password;
     console.log("else2: " + data.password);
-
   }
 
   console.log(data);
 
+  const contacts = await Contact.find({email: user.email})
+  contacts.forEach(contact => {
+    if(contact.contact_name !== (data.name + " " + data.surname)) contact.contact_name = (data.name + " " + data.surname);
+    if(contact.contact_email !== data.email) contact.contact_email = data.email;
+    if(contact.contact_img !== data.image) contact.contact_img = data.image;
+    contact.save();
+  });
   
   const updatedUser = await User.findOneAndUpdate({_id: id},data)
   return res.status(200).json({ message: "Your user has been updated succesfully", updatedUser});

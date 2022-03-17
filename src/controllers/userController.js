@@ -126,7 +126,7 @@ exports.update = async (req,res) => {
 
   console.log(data);
 
-  const contacts = await Contact.find({email: user.email})
+  const contacts = await Contact.find({contact_email: user.email})
   contacts.forEach(contact => {
     if(contact.contact_name !== (data.name + " " + data.surname)) contact.contact_name = (data.name + " " + data.surname);
     if(contact.contact_email !== data.email) contact.contact_email = data.email;

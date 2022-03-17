@@ -71,7 +71,6 @@ exports.create = async (req, res) => {
   };
 
     exports.delete = (req,res) => {
-    console.log(req.params.id);
     const id = req.params.id;
   
     User.deleteOne({_id: id}, function (err) {
@@ -84,9 +83,7 @@ exports.create = async (req, res) => {
 
 exports.findOneName = async (req, res) =>{
   let id = req.params.id;
-  console.log(id);
   const userData = await User.findById(id);
-  console.log(userData)
   return res.status(200).json(userData.name);
 };
 
@@ -100,7 +97,6 @@ exports.findOneId = async (req, res) =>{
   let email = req.params.email;
   const userData = await User.find({"email": email});
   if(!userData[0]) return res.status(201).json(null);
-  console.log("Found and sent");
   return res.status(200).json(userData[0]._id);
 };
 
@@ -109,22 +105,19 @@ exports.update = async (req,res) => {
   const id = user._id
   const data = req.body;
 
+  savedUser = await User.find({_id:id});
 
-  console.log("updating");
-  if (data.password && data.password.length>0) {
-    console.log("if: " + data.password + data.currency);
+
+  if (data.password && data.password.length>0 && data.password !== savedUser[0].password) {
     const genSalt = 10;
     const passwordHashed = bcrypt.hashSync(data.password, genSalt);
     data.password=passwordHashed;
   } 
   
   else {
-    console.log("else1: " + data.password + data.currency);
-    data.password = await User.find({_id:id}).password;
-    console.log("else2: " + data.password);
+    data.password = savedUser.password;
   }
 
-  console.log(data);
 
   const contacts = await Contact.find({contact_email: user.email})
   contacts.forEach(contact => {

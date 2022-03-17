@@ -22,7 +22,6 @@ exports.create = (req, res) => {
 }
 
 exports.delete = (req,res) => {
-  console.log(req.params.id);
   const id = req.params.id;
   
   PaymentMethod.deleteOne({_id: id}, function (err) {

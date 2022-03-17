@@ -17,7 +17,6 @@ exports.create = async (req, res) => {
   newRequest.save(
     function (err) {
       if (err) {
-        console.log(err);
         return handleError(err);
       }
     }
@@ -26,7 +25,6 @@ exports.create = async (req, res) => {
 }
 
 exports.delete = (req,res) => {
-  console.log(req.params.id);
   const id = req.params.id;
   
   Request.deleteOne({_id: id}, function (err) {

@@ -13,7 +13,6 @@ exports.findOne = async (req, res) =>{
 exports.create = async (req, res) => {
   const contactEmail = req.body.email;
   const userData = await User.find({"email": contactEmail});
-  console.log(userData)
   const userSession = req.sessionUser
   const data = {
     user_id: userSession._id, 
@@ -32,7 +31,6 @@ exports.create = async (req, res) => {
 }
 
 exports.delete = (req,res) => {
-  console.log(req.params.id);
   const id = req.params.id;
   
   Contact.deleteOne({_id: id}, function (err) {

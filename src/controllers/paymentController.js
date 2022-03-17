@@ -22,7 +22,6 @@ exports.create = async (req, res) => {
   newPayment.save(
     function (err) {
       if (err) {
-        console.log(err);
         return handleError(err);
       }
       else {
@@ -47,7 +46,6 @@ exports.create = async (req, res) => {
               
               currencyConverter.from("USD").to("EUR").amount(data.amount).convert()
               .then((response) => {
-                console.log(response/100) ;
                 toUser.wallet +=response/100;
                 toUser.save();
               })
@@ -57,14 +55,12 @@ exports.create = async (req, res) => {
             {
             currencyConverter.from("USD").to("EUR").amount(data.amount).convert()
               .then((response) => {
-                console.log(response/100) ;
                 fromUser.wallet -=response/100;
                 fromUser.save();
               })
             
             currencyConverter.from("USD").to("EUR").amount(data.amount).convert()
               .then((response) => {
-                console.log(response/100) ;
                 toUser.wallet +=response/100;
                 toUser.save();
               })
@@ -74,7 +70,6 @@ exports.create = async (req, res) => {
             {
             currencyConverter.from("USD").to("EUR").amount(data.amount).convert()
               .then((response) => {
-                console.log(response/100) ;
                 fromUser.wallet -=response/100;
                 fromUser.save();
               })
@@ -90,14 +85,12 @@ exports.create = async (req, res) => {
             {
             currencyConverter.from("EUR").to("USD").amount(data.amount).convert()
               .then((response) => {
-                console.log(response/100) ;
                 fromUser.wallet -=response/100;
                 fromUser.save();
               })
             
             currencyConverter.from("EUR").to("USD").amount(data.amount).convert()
               .then((response) => {
-                console.log(response/100) ;
                 toUser.wallet +=response/100;
                 toUser.save();
               })
@@ -106,7 +99,6 @@ exports.create = async (req, res) => {
             else if (fromUser.currency=='$' && toUser.currency=='€') {
               currencyConverter.from("EUR").to("USD").amount(data.amount).convert()
               .then((response) => {
-                console.log(response/100) ;
                 fromUser.wallet -=response/100;
                 fromUser.save();
               })
@@ -129,7 +121,6 @@ exports.create = async (req, res) => {
 
             currencyConverter.from("EUR").to("USD").amount(data.amount).convert()
               .then((response) => {
-                console.log(response/100) ;
                 toUser.wallet +=response/100;
                 toUser.save();
               })
@@ -144,7 +135,6 @@ exports.create = async (req, res) => {
 }
 
 exports.delete = (req,res) => {
-  console.log(req.params.id);
   const id = req.params.id;
   
   Payment.deleteOne({_id: id}, function (err) {

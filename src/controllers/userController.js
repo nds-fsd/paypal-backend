@@ -25,14 +25,14 @@ exports.findPaymentMethods = async (req, res) =>{
 };
 
 exports.findPayments = async (req, res) =>{
-
   const user = req.sessionUser;
   const payments = await Payment.find({$or: [{from: user._id}, {to: user._id}]});
   res.status(200).json(payments);
 };
 
 exports.findRequests = async (req, res) =>{
-  const requests = await Request.find({to: req.params.id});
+  const user = req.sessionUser;
+  const requests = await Request.find({to: user._id});
   res.status(200).json(requests);
 };
   
@@ -105,7 +105,8 @@ exports.findOneId = async (req, res) =>{
 };
 
 exports.update = async (req,res) => {
-  const id = req.params.id;
+  const user = req.sessionUser;
+  const id = user._id
   const data = req.body;
   console.log("updating");
   if (data.password && data.password.length>0) {

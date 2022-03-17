@@ -8,6 +8,7 @@ const ContactSchema = new Schema({
   },
   contact_name: String,
   contact_email: String,
+  contact_img: String,
 });
 
 const Contact = mongoose.model("contact", ContactSchema);

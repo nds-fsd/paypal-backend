@@ -17,7 +17,7 @@ UserRouter.get('/contacts',authMiddleware, UserController.findContacts);
 UserRouter.get('/:id/payment_methods', authMiddleware, UserController.findPaymentMethods);
 
 UserRouter.get('/payments', authMiddleware, UserController.findPayments);
-UserRouter.get('/:id/requests', authMiddleware, UserController.findRequests);
+UserRouter.get('/requests', authMiddleware, UserController.findRequests);
 
 UserRouter.post('/', body("email", "Email must be a valid email.").isEmail(), UserController.create)
 
@@ -25,9 +25,9 @@ UserRouter.get('/me', authMiddleware, UserController.findOne);
 
 UserRouter.delete('/:id', authMiddleware, UserController.delete);
 
-UserRouter.patch('/:id', authMiddleware, UserController.update);
+UserRouter.patch('/', authMiddleware, UserController.update);
 
-UserRouter.put('/:id',authMiddleware, UserController.update);
+UserRouter.put('/',authMiddleware, UserController.update);
 
 
 module.exports = { UserRouter };

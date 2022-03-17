@@ -18,7 +18,8 @@ exports.create = async (req, res) => {
   const data = {
     user_id: userSession._id, 
     contact_name: userData[0].name + " " + userData[0].surname,
-    contact_email: contactEmail
+    contact_email: contactEmail,
+    contact_img: userData[0].image
   }
   var newContact = new Contact(data);
   

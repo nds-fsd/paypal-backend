@@ -114,7 +114,7 @@ exports.update = async (req,res) => {
     data.password=passwordHashed;
   } 
   
-  else {await User.find({_id:id}).password
+  else {
     data.password = savedUser.password;
   }
 
